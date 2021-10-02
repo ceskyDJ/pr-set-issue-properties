@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
 name: 'PR set issue properties'
-description: 'A GitHub Action help you set issue's properties (labels and milestone) to pull requst.'
+description: 'A GitHub Action help you set issue properties (labels and milestone) to pull requst.'
 author: 'ceskyDJ'
 
 # https://actions-cool.github.io/github-action-branding/
