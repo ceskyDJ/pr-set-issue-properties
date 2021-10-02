@@ -28,10 +28,19 @@ async function run() {
           }
         });
       } else if (way === 'body') {
-        let arr = body.split('\n');
-        arr.forEach(it => {
-          if (it.startsWith('#')) {
-            issues.push(it.replace('#', '').replace('\n', ''));
+        let line = body.split('\n');
+        line.forEach(it => {
+          if (!it.includes('#')) {
+            return;
+          }
+
+          let regexResult;
+          if((regexResult = it.match(/((close[sd]?)|(fix(e[sd])?)|(resolve[sd]?)) #([1-9][0-9]*)/i)) !== null) {
+            // Github linked issues
+            issues.push(regexResult[6]);
+          } else if ((regexResult = it.match(/(issue|task) #([1-9][0-9]*)/i)) !== null) {
+            // Own linking system (without closing issues)
+            issues.push(regexResult[2]);
           }
         });
       } else if (way === 'commit') {
@@ -105,7 +114,7 @@ async function run() {
           });
           core.info(`Actions: [create-comment][${issue}][${body}] success!`);
         }
-        if (close == 'true') {
+        if (close === 'true') {
           await octokit.issues.update({
             owner,
             repo,
