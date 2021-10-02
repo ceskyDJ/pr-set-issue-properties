@@ -151,7 +151,7 @@ async function run() {
         repo,
         issue_number: number,
         labels: referenceData.data.labels,
-        milestone: referenceData.data.milestone,
+        milestone: referenceData.data.milestone.number,
       });
       core.info('Actions: [copy-properties] success!');
     } else {
