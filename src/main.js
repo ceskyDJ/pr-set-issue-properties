@@ -138,6 +138,8 @@ async function run() {
       // The first issue is reference - its properties will be set to the pull request
       const referenceIssue = issues[0];
 
+      core.info('Started working on the new things...');
+
       // Load reference issue
       const referenceData = await octokit.issues.get({
         owner,
