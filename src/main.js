@@ -145,6 +145,8 @@ async function run() {
         issue_number: referenceIssue,
       });
 
+      core.info('Actions: [get-properties] success!');
+
       // Set labels and milestone to pull request
       await octokit.issues.update({
         owner,
