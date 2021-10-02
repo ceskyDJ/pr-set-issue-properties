@@ -14,5 +14,5 @@ jobs:
           issues-labels: 'l1, l2'
           filter-label: 'bug'
           issues-comment: |
-            HI。这个 issue: ${number} 已经被修复了。
+            - Linked pull request: ${number}
           issues-close: true

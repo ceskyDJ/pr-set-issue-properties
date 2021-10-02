@@ -109,7 +109,7 @@ async function run() {
           core.info(`Actions: [add-labels][${issue}][${labels}] success!`);
         }
         if (comment) {
-          const body = comment.replace('${number}', `#${issue}`);
+          const body = comment.replace('${number}', `#${number}`);
           await octokit.issues.createComment({
             owner,
             repo,
