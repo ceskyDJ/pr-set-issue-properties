@@ -18,12 +18,16 @@ inputs:
     required: true
   filter-label:
     description: Further filter issues through label
+    required: false
   issues-labels:
     description: Extra operations on issues
+    required: false
   issues-comment:
     description: Extra operations on issues
+    required: false
   issues-close:
     description: Extra operations on issues
+    required: false
 
 outputs:
   issues:

@@ -35,7 +35,11 @@ async function run() {
           }
 
           let regexResult;
-          if((regexResult = it.match(/((close[sd]?)|(fix(e[sd])?)|(resolve[sd]?)) #([1-9][0-9]*)/i)) !== null) {
+          if (
+            (regexResult = it.match(
+              /((close[sd]?)|(fix(e[sd])?)|(resolve[sd]?)) #([1-9][0-9]*)/i,
+            )) !== null
+          ) {
             // Github linked issues
             issues.push(regexResult[6]);
           } else if ((regexResult = it.match(/(issue|task) #([1-9][0-9]*)/i)) !== null) {
