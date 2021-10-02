@@ -136,28 +136,29 @@ async function run() {
       }
 
       // The first issue is reference - its properties will be set to the pull request
-      const referenceIssue = issues[0];
+      // Of course, this is used only when there is some linked issue
+      if (issues.length > 0) {
+        const referenceIssue = issues[0];
 
-      core.info('Started working on the new things...');
+        // Load reference issue
+        const referenceData = await octokit.issues.get({
+          owner,
+          repo,
+          issue_number: referenceIssue,
+        });
 
-      // Load reference issue
-      const referenceData = await octokit.issues.get({
-        owner,
-        repo,
-        issue_number: referenceIssue,
-      });
+        core.info('Actions: [get-properties] success!');
 
-      core.info('Actions: [get-properties] success!');
-
-      // Set labels and milestone to pull request
-      await octokit.issues.update({
-        owner,
-        repo,
-        issue_number: number,
-        labels: referenceData.data.labels,
-        milestone: referenceData.data.milestone.number,
-      });
-      core.info('Actions: [copy-properties] success!');
+        // Set labels and milestone to pull request
+        await octokit.issues.update({
+          owner,
+          repo,
+          issue_number: number,
+          labels: referenceData.data.labels,
+          milestone: referenceData.data.milestone.number,
+        });
+        core.info('Actions: [copy-properties] success!');
+      }
     } else {
       core.setFailed(outEventErr);
     }
