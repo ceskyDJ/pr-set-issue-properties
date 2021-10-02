@@ -94,11 +94,13 @@ async function run() {
       const comment = core.getInput('issues-comment');
       const close = core.getInput('issues-close');
 
+      // Extra actions (by config)
       if (!labels && !comment && !close) {
         return false;
       }
 
       for await (let issue of issues) {
+        // Adding labels to issue
         if (labels) {
           await octokit.issues.addLabels({
             owner,
@@ -108,6 +110,8 @@ async function run() {
           });
           core.info(`Actions: [add-labels][${issue}][${labels}] success!`);
         }
+
+        // Adding comment to issue
         if (comment) {
           const body = comment.replace('${number}', `#${number}`);
           await octokit.issues.createComment({
@@ -118,6 +122,8 @@ async function run() {
           });
           core.info(`Actions: [create-comment][${issue}][${body}] success!`);
         }
+
+        // Closing issue
         if (close === 'true') {
           await octokit.issues.update({
             owner,
