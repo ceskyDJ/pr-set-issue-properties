@@ -1,7 +1,7 @@
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
-name: 'PR Extract Issues'
-description: 'A GitHub Action help you extract issues from pr commit or title or body.'
-author: 'xrkffgg'
+name: 'PR set issue properties'
+description: 'A GitHub Action help you set issue's properties (labels and milestone) to pull requst.'
+author: 'ceskyDJ'
 
 # https://actions-cool.github.io/github-action-branding/
 branding:
