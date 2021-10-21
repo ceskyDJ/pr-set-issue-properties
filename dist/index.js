@@ -9610,6 +9610,19 @@ async function run() {
           }
         });
       } else if (way === 'body') {
+        if (body === null) {
+          await octokit.issues.createComment({
+            owner,
+            repo,
+            issue_number: number,
+            body: '[Automation] Pull request description is empty. Create it at least for linking issue, please.',
+          });
+
+          core.setFailed('Pull request description is empty');
+
+          return;
+        }
+
         let line = body.split('\n');
         line.forEach(it => {
           if (!it.includes('#')) {
@@ -9740,6 +9753,17 @@ async function run() {
           milestone: referenceData.data.milestone.number,
         });
         core.info('Actions: [copy-properties] success!');
+      } else {
+        await octokit.issues.createComment({
+          owner,
+          repo,
+          issue_number: number,
+          body: '[Automation] There is no issue to link with this pull request. Add linked issue to the description, please.',
+        });
+
+        core.setFailed(
+          'You need to link issue using its ID in pull request description with the right keyword before',
+        );
       }
     } else {
       core.setFailed(outEventErr);
